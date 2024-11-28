@@ -1,0 +1,12 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid (49C68149-D4D0-41CA-A954-2FA8DE14ED31), // You must change this when you change the interface
+    version(1.0),
+]
+
+interface PServer
+{
+    int RpcTerminate();
+}
