@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\InterfaceImpl.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main_p1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plugin1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MIDL\midl\plugin_s.c">
+      <Filter>RPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MIDL\midl\controller_c.c">
+      <Filter>RPC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Plugin1.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MIDL\midl\PluginBase.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MIDL\midl\rpc_plugin_h.h">
+      <Filter>RPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MIDL\midl\rpc_controller_h.h">
+      <Filter>RPC</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{f7905004-b041-458f-9b7c-fa86e5774774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{950ba03a-167a-4c2a-8eb7-0dc1e61360e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RPC">
+      <UniqueIdentifier>{c1194fd6-7dbb-44e5-b7f4-dae81a776cbe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
