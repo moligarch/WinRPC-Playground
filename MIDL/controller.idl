@@ -4,9 +4,11 @@ import "ocidl.idl";
 [
     uuid (E4A0BCF4-7F16-4EB7-8B8B-4F5B31D275F6), // You must change this when you change the interface
     version(1.0),
+    implicit_handle(handle_t hController),
 ]
 
-interface CServer
+interface Controller
 {
-    void Print([in, string] const char* szOutput);
+    boolean RpcControllerHealthCheck();
+    void RpcRequestController([in] int request, [in, out, string] char* result);
 }

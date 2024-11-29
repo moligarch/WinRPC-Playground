@@ -1,17 +1,17 @@
-#include "RpcServer.h"
+#include "Executer.h"
 #include <memory>
 
-RpcServer::RpcServer() noexcept
+Executer::Executer() noexcept
 {
 }
 
-RpcServer::~RpcServer()
+Executer::~Executer()
 {
     if(GetListenState())
         Stop();
 }
 
-void RpcServer::Start()
+void Executer::Start()
 {
     if (GetListenState()) {
         return;
@@ -31,7 +31,7 @@ void RpcServer::Start()
 
     // Registers the Example1 interface.
     status = RpcServerRegisterIf2(
-        PServer_v1_0_s_ifspec,						// Interface to register.
+        Plugin_v1_0_s_ifspec,						// Interface to register.
         NULL,                             // Use the MIDL generated entry-point vector.
         NULL,									// Use the MIDL generated entry-point vector.
         RPC_IF_ALLOW_CALLBACKS_WITH_NO_AUTH,	// Forces use of security callback.
@@ -60,7 +60,7 @@ void RpcServer::Start()
     SetListenState(true);
 }
 
-void RpcServer::Stop()
+void Executer::Stop()
 {
     if (!GetListenState()) {
         return;
@@ -77,7 +77,7 @@ void RpcServer::Stop()
     if (status)
         exit(status);
 
-    status = RpcBindingFree(&PServer_v1_0_s_ifspec);
+    status = RpcBindingFree(&Plugin_v1_0_s_ifspec);
 
     if (status)
         exit(status);
@@ -85,18 +85,18 @@ void RpcServer::Stop()
     SetListenState(false);
 }
 
-RpcServer* RpcServer::Get()
+Executer* Executer::Get()
 {
-    static std::unique_ptr< RpcServer> instance{ new RpcServer() };
+    static std::unique_ptr< Executer> instance{ new Executer() };
     return instance.get();
 }
 
-bool RpcServer::GetListenState() const
+bool Executer::GetListenState() const
 {
     return started_;
 }
 
-void RpcServer::SetListenState(bool state) noexcept
+void Executer::SetListenState(bool state) noexcept
 {
     started_ = state;
 }

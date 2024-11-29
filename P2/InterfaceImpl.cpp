@@ -3,15 +3,22 @@
 
 #include <iostream>
 #include <thread>
-#include "RpcServer.h"
+#include "Executer.h"
+#include <iomanip>
 
 
 
 
-int RpcTerminate(
+int RpcStart(
+    /* [in] */ handle_t IDL_handl)
+{
+    return 0;
+}
+
+int RpcShutdown(
     /* [in] */ handle_t IDL_handle)
 {
-    auto server = RpcServer::Get();
+    auto server = Executer::Get();
     std::cout << "RpcController wants to terminate you. Is it OK?\n1.Yes\n2.No\n";
     char verify{};
     std::cin >> verify;
@@ -26,6 +33,21 @@ int RpcTerminate(
     }
     
     return 0;
+}
+
+boolean RpcPluginHealthCheck(
+    /* [in] */ handle_t IDL_handle) {
+    if (true) {
+
+    }
+}
+
+void RpcCommandPlugin(
+    /* [in] */ handle_t h,
+    /* [in] */ int command,
+    /* [string][out][in] */ unsigned char* result)
+{
+
 }
 
 

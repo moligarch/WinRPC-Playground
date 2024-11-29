@@ -8,7 +8,7 @@
  */
 /* Compiler settings for controller.idl:
     Oicf, W3, Zp8, env=Win64 (32b run), target_arch=AMD64 8.01.0626 
-    protocol : all , ms_ext, c_ext, robust
+    protocol : all , ms_ext, app_config, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
@@ -57,21 +57,25 @@ extern "C"{
 #endif 
 
 
-#ifndef __CServer_INTERFACE_DEFINED__
-#define __CServer_INTERFACE_DEFINED__
+#ifndef __Controller_INTERFACE_DEFINED__
+#define __Controller_INTERFACE_DEFINED__
 
-/* interface CServer */
-/* [version][uuid] */ 
+/* interface Controller */
+/* [implicit_handle][implicit_handle][version][uuid] */ 
 
-void Print( 
-    /* [in] */ handle_t IDL_handle,
-    /* [string][in] */ const unsigned char *szOutput);
+boolean RpcControllerHealthCheck( void);
+
+void RpcRequestController( 
+    /* [in] */ int request,
+    /* [string][out][in] */ unsigned char *result);
 
 
+extern handle_t hController;
 
-extern RPC_IF_HANDLE CServer_v1_0_c_ifspec;
-extern RPC_IF_HANDLE CServer_v1_0_s_ifspec;
-#endif /* __CServer_INTERFACE_DEFINED__ */
+
+extern RPC_IF_HANDLE Controller_v1_0_c_ifspec;
+extern RPC_IF_HANDLE Controller_v1_0_s_ifspec;
+#endif /* __Controller_INTERFACE_DEFINED__ */
 
 /* Additional Prototypes for ALL interfaces */
 
