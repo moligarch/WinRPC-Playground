@@ -8,7 +8,7 @@
  */
 /* Compiler settings for plugin.idl:
     Oicf, W3, Zp8, env=Win64 (32b run), target_arch=AMD64 8.01.0626 
-    protocol : all , ms_ext, c_ext, robust
+    protocol : all , ms_ext, app_config, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
@@ -57,20 +57,31 @@ extern "C"{
 #endif 
 
 
-#ifndef __PServer_INTERFACE_DEFINED__
-#define __PServer_INTERFACE_DEFINED__
+#ifndef __Plugin_INTERFACE_DEFINED__
+#define __Plugin_INTERFACE_DEFINED__
 
-/* interface PServer */
-/* [version][uuid] */ 
+/* interface Plugin */
+/* [explicit_handle][version][uuid] */ 
 
-int RpcTerminate( 
+int RpcStart( 
     /* [in] */ handle_t IDL_handle);
 
+int RpcShutdown( 
+    /* [in] */ handle_t IDL_handle);
+
+boolean RpcPluginHealthCheck( 
+    /* [in] */ handle_t IDL_handle);
+
+void RpcCommandPlugin( 
+    /* [in] */ handle_t IDL_handle,
+    /* [in] */ int command,
+    /* [string][out][in] */ unsigned char *result);
 
 
-extern RPC_IF_HANDLE PServer_v1_0_c_ifspec;
-extern RPC_IF_HANDLE PServer_v1_0_s_ifspec;
-#endif /* __PServer_INTERFACE_DEFINED__ */
+
+extern RPC_IF_HANDLE Plugin_v1_0_c_ifspec;
+extern RPC_IF_HANDLE Plugin_v1_0_s_ifspec;
+#endif /* __Plugin_INTERFACE_DEFINED__ */
 
 /* Additional Prototypes for ALL interfaces */
 

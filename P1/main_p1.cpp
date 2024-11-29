@@ -5,11 +5,11 @@
 #include <thread>
 #include <chrono>
 
-#include "RpcServer.h"
+#include "Plugin1.h"
 
 int main()
 {
-	auto server = RpcServer::Get();
+	auto server = Plugin1::Get();
 	server->Start();
 
 	while (server->GetListenState())

@@ -89,7 +89,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
-      <OutputDirectory>include\</OutputDirectory>
+      <OutputDirectory>midl\</OutputDirectory>
     </Midl>
     <Midl>
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
@@ -116,7 +116,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
-      <OutputDirectory>include\</OutputDirectory>
+      <OutputDirectory>midl\</OutputDirectory>
     </Midl>
     <Midl>
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
@@ -139,7 +139,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
-      <OutputDirectory>include\</OutputDirectory>
+      <OutputDirectory>midl\</OutputDirectory>
     </Midl>
     <Midl>
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
@@ -166,7 +166,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Midl>
-      <OutputDirectory>include\</OutputDirectory>
+      <OutputDirectory>midl\</OutputDirectory>
     </Midl>
     <Midl>
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
