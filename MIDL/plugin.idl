@@ -6,7 +6,10 @@ import "ocidl.idl";
     version(1.0),
 ]
 
-interface PServer
+interface Plugin
 {
-    int RpcTerminate();
+    int RpcStart([in] handle_t IDL_handle);
+    int RpcShutdown([in] handle_t IDL_handle);
+    boolean RpcPluginHealthCheck([in] handle_t IDL_handle);
+    void RpcCommandPlugin([in] handle_t IDL_handle, [in] int command, [in, out, string] char* result);
 }
