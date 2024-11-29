@@ -63,11 +63,10 @@ extern "C"{
 /* interface Controller */
 /* [implicit_handle][implicit_handle][version][uuid] */ 
 
-boolean RpcControllerHealthCheck( void);
-
-void RpcRequestController( 
-    /* [in] */ int request,
-    /* [string][out][in] */ unsigned char *result);
+boolean RpcControllerHealthCheck( 
+    /* [in] */ handle_t pluginHandle,
+    /* [in] */ int pluginID,
+    /* [range][in] */ unsigned char *port);
 
 
 extern handle_t hController;

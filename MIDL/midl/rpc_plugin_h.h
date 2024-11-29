@@ -63,17 +63,15 @@ extern "C"{
 /* interface Plugin */
 /* [explicit_handle][version][uuid] */ 
 
-int RpcStart( 
-    /* [in] */ handle_t IDL_handle);
-
-int RpcShutdown( 
-    /* [in] */ handle_t IDL_handle);
+void RpcShutdown( 
+    /* [in] */ handle_t h,
+    /* [out] */ boolean *state);
 
 boolean RpcPluginHealthCheck( 
-    /* [in] */ handle_t IDL_handle);
+    /* [in] */ handle_t h);
 
 void RpcCommandPlugin( 
-    /* [in] */ handle_t IDL_handle,
+    /* [in] */ handle_t h,
     /* [in] */ int command,
     /* [string][out][in] */ unsigned char *result);
 

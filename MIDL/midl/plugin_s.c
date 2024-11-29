@@ -30,8 +30,8 @@
 #include <string.h>
 #include "rpc_plugin_h.h"
 
-#define TYPE_FORMAT_STRING_SIZE   7                                 
-#define PROC_FORMAT_STRING_SIZE   151                               
+#define TYPE_FORMAT_STRING_SIZE   11                                
+#define PROC_FORMAT_STRING_SIZE   115                               
 #define EXPR_FORMAT_STRING_SIZE   1                                 
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   0            
@@ -152,7 +152,7 @@ static const plugin_MIDL_PROC_FORMAT_STRING plugin__MIDL_ProcFormatString =
         0,
         {
 
-	/* Procedure RpcStart */
+	/* Procedure RpcShutdown */
 
 			0x0,		/* 0 */
 			0x48,		/* Old Flags:  */
@@ -163,8 +163,8 @@ static const plugin_MIDL_PROC_FORMAT_STRING plugin__MIDL_ProcFormatString =
 			0x0,		/* 0 */
 /* 12 */	NdrFcShort( 0x0 ),	/* X64 Stack size/offset = 0 */
 /* 14 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 16 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 18 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 16 */	NdrFcShort( 0x19 ),	/* 25 */
+/* 18 */	0x40,		/* Oi2 Flags:  has ext, */
 			0x1,		/* 1 */
 /* 20 */	0xa,		/* 10 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -173,14 +173,14 @@ static const plugin_MIDL_PROC_FORMAT_STRING plugin__MIDL_ProcFormatString =
 /* 26 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 28 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Return value */
+	/* Parameter state */
 
-/* 30 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 30 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 32 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
-/* 34 */	0x8,		/* FC_LONG */
+/* 34 */	0x3,		/* FC_SMALL */
 			0x0,		/* 0 */
 
-	/* Procedure RpcShutdown */
+	/* Procedure RpcPluginHealthCheck */
 
 /* 36 */	0x0,		/* 0 */
 			0x48,		/* Old Flags:  */
@@ -191,7 +191,7 @@ static const plugin_MIDL_PROC_FORMAT_STRING plugin__MIDL_ProcFormatString =
 			0x0,		/* 0 */
 /* 48 */	NdrFcShort( 0x0 ),	/* X64 Stack size/offset = 0 */
 /* 50 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 52 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 52 */	NdrFcShort( 0x5 ),	/* 5 */
 /* 54 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x1,		/* 1 */
 /* 56 */	0xa,		/* 10 */
@@ -205,23 +205,23 @@ static const plugin_MIDL_PROC_FORMAT_STRING plugin__MIDL_ProcFormatString =
 
 /* 66 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
 /* 68 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
-/* 70 */	0x8,		/* FC_LONG */
+/* 70 */	0x3,		/* FC_SMALL */
 			0x0,		/* 0 */
 
-	/* Procedure RpcPluginHealthCheck */
+	/* Procedure RpcCommandPlugin */
 
 /* 72 */	0x0,		/* 0 */
 			0x48,		/* Old Flags:  */
 /* 74 */	NdrFcLong( 0x0 ),	/* 0 */
 /* 78 */	NdrFcShort( 0x2 ),	/* 2 */
-/* 80 */	NdrFcShort( 0x10 ),	/* X64 Stack size/offset = 16 */
+/* 80 */	NdrFcShort( 0x18 ),	/* X64 Stack size/offset = 24 */
 /* 82 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x0,		/* 0 */
 /* 84 */	NdrFcShort( 0x0 ),	/* X64 Stack size/offset = 0 */
-/* 86 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 88 */	NdrFcShort( 0x5 ),	/* 5 */
-/* 90 */	0x44,		/* Oi2 Flags:  has return, has ext, */
-			0x1,		/* 1 */
+/* 86 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 88 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 90 */	0x43,		/* Oi2 Flags:  srv must size, clt must size, has ext, */
+			0x2,		/* 2 */
 /* 92 */	0xa,		/* 10 */
 			0x1,		/* Ext Flags:  new corr desc, */
 /* 94 */	NdrFcShort( 0x0 ),	/* 0 */
@@ -229,46 +229,18 @@ static const plugin_MIDL_PROC_FORMAT_STRING plugin__MIDL_ProcFormatString =
 /* 98 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 100 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Return value */
-
-/* 102 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 104 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
-/* 106 */	0x3,		/* FC_SMALL */
-			0x0,		/* 0 */
-
-	/* Procedure RpcCommandPlugin */
-
-/* 108 */	0x0,		/* 0 */
-			0x48,		/* Old Flags:  */
-/* 110 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 114 */	NdrFcShort( 0x3 ),	/* 3 */
-/* 116 */	NdrFcShort( 0x18 ),	/* X64 Stack size/offset = 24 */
-/* 118 */	0x32,		/* FC_BIND_PRIMITIVE */
-			0x0,		/* 0 */
-/* 120 */	NdrFcShort( 0x0 ),	/* X64 Stack size/offset = 0 */
-/* 122 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 124 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 126 */	0x43,		/* Oi2 Flags:  srv must size, clt must size, has ext, */
-			0x2,		/* 2 */
-/* 128 */	0xa,		/* 10 */
-			0x1,		/* Ext Flags:  new corr desc, */
-/* 130 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 132 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 134 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 136 */	NdrFcShort( 0x0 ),	/* 0 */
-
 	/* Parameter command */
 
-/* 138 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
-/* 140 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
-/* 142 */	0x8,		/* FC_LONG */
+/* 102 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 104 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
+/* 106 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Parameter result */
 
-/* 144 */	NdrFcShort( 0x11b ),	/* Flags:  must size, must free, in, out, simple ref, */
-/* 146 */	NdrFcShort( 0x10 ),	/* X64 Stack size/offset = 16 */
-/* 148 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
+/* 108 */	NdrFcShort( 0x11b ),	/* Flags:  must size, must free, in, out, simple ref, */
+/* 110 */	NdrFcShort( 0x10 ),	/* X64 Stack size/offset = 16 */
+/* 112 */	NdrFcShort( 0x8 ),	/* Type Offset=8 */
 
 			0x0
         }
@@ -280,8 +252,12 @@ static const plugin_MIDL_TYPE_FORMAT_STRING plugin__MIDL_TypeFormatString =
         {
 			NdrFcShort( 0x0 ),	/* 0 */
 /*  2 */	
+			0x11, 0xc,	/* FC_RP [alloced_on_stack] [simple_pointer] */
+/*  4 */	0x3,		/* FC_SMALL */
+			0x5c,		/* FC_PAD */
+/*  6 */	
 			0x11, 0x8,	/* FC_RP [simple_pointer] */
-/*  4 */	
+/*  8 */	
 			0x22,		/* FC_C_CSTRING */
 			0x5c,		/* FC_PAD */
 
@@ -293,8 +269,7 @@ static const unsigned short Plugin_FormatStringOffsetTable[] =
     {
     0,
     36,
-    72,
-    108
+    72
     };
 
 
@@ -303,12 +278,11 @@ static const RPC_DISPATCH_FUNCTION Plugin_table[] =
     NdrServerCall2,
     NdrServerCall2,
     NdrServerCall2,
-    NdrServerCall2,
     0
     };
 static const RPC_DISPATCH_TABLE Plugin_v1_0_DispatchTable = 
     {
-    4,
+    3,
     (RPC_DISPATCH_FUNCTION*)Plugin_table
     };
 
@@ -349,18 +323,18 @@ static const RPC_DISPATCH_TABLE Plugin_v1_0_DispatchTable =
 
 typedef 
 struct _NDR64_CONFORMANT_STRING_FORMAT
-__midl_frag11_t;
-extern const __midl_frag11_t __midl_frag11;
-
-typedef 
-struct _NDR64_POINTER_FORMAT
 __midl_frag10_t;
 extern const __midl_frag10_t __midl_frag10;
 
 typedef 
-NDR64_FORMAT_CHAR
+struct _NDR64_POINTER_FORMAT
 __midl_frag9_t;
 extern const __midl_frag9_t __midl_frag9;
+
+typedef 
+NDR64_FORMAT_CHAR
+__midl_frag8_t;
+extern const __midl_frag8_t __midl_frag8;
 
 typedef 
 struct 
@@ -370,21 +344,11 @@ struct
     struct _NDR64_PARAM_FORMAT frag3;
     struct _NDR64_PARAM_FORMAT frag4;
 }
-__midl_frag8_t;
-extern const __midl_frag8_t __midl_frag8;
-
-typedef 
-NDR64_FORMAT_CHAR
 __midl_frag7_t;
 extern const __midl_frag7_t __midl_frag7;
 
 typedef 
-struct 
-{
-    struct _NDR64_PROC_FORMAT frag1;
-    struct _NDR64_BIND_AND_NOTIFY_EXTENSION frag2;
-    struct _NDR64_PARAM_FORMAT frag3;
-}
+NDR64_FORMAT_CHAR
 __midl_frag6_t;
 extern const __midl_frag6_t __midl_frag6;
 
@@ -395,15 +359,30 @@ struct
     struct _NDR64_BIND_AND_NOTIFY_EXTENSION frag2;
     struct _NDR64_PARAM_FORMAT frag3;
 }
-__midl_frag4_t;
-extern const __midl_frag4_t __midl_frag4;
+__midl_frag5_t;
+extern const __midl_frag5_t __midl_frag5;
+
+typedef 
+struct _NDR64_POINTER_FORMAT
+__midl_frag3_t;
+extern const __midl_frag3_t __midl_frag3;
+
+typedef 
+struct 
+{
+    struct _NDR64_PROC_FORMAT frag1;
+    struct _NDR64_BIND_AND_NOTIFY_EXTENSION frag2;
+    struct _NDR64_PARAM_FORMAT frag3;
+}
+__midl_frag2_t;
+extern const __midl_frag2_t __midl_frag2;
 
 typedef 
 NDR64_FORMAT_UINT32
 __midl_frag1_t;
 extern const __midl_frag1_t __midl_frag1;
 
-static const __midl_frag11_t __midl_frag11 =
+static const __midl_frag10_t __midl_frag10 =
 { 
 /* *char */
     { 
@@ -424,19 +403,19 @@ static const __midl_frag11_t __midl_frag11 =
     }
 };
 
-static const __midl_frag10_t __midl_frag10 =
+static const __midl_frag9_t __midl_frag9 =
 { 
 /* *char */
     0x20,    /* FC64_RP */
     (NDR64_UINT8) 0 /* 0x0 */,
     (NDR64_UINT16) 0 /* 0x0 */,
-    &__midl_frag11
+    &__midl_frag10
 };
 
-static const __midl_frag9_t __midl_frag9 =
+static const __midl_frag8_t __midl_frag8 =
 0x5    /* FC64_INT32 */;
 
-static const __midl_frag8_t __midl_frag8 =
+static const __midl_frag7_t __midl_frag7 =
 { 
 /* RpcCommandPlugin */
     { 
@@ -464,7 +443,7 @@ static const __midl_frag8_t __midl_frag8 =
     },
     { 
     /* command */      /* parameter command */
-        &__midl_frag9,
+        &__midl_frag8,
         { 
         /* command */
             0,
@@ -488,7 +467,7 @@ static const __midl_frag8_t __midl_frag8 =
     },
     { 
     /* result */      /* parameter result */
-        &__midl_frag11,
+        &__midl_frag10,
         { 
         /* result */
             1,
@@ -512,10 +491,10 @@ static const __midl_frag8_t __midl_frag8 =
     }
 };
 
-static const __midl_frag7_t __midl_frag7 =
+static const __midl_frag6_t __midl_frag6 =
 0x2    /* FC64_INT8 */;
 
-static const __midl_frag6_t __midl_frag6 =
+static const __midl_frag5_t __midl_frag5 =
 { 
 /* RpcPluginHealthCheck */
     { 
@@ -543,7 +522,7 @@ static const __midl_frag6_t __midl_frag6 =
     },
     { 
     /* boolean */      /* parameter boolean */
-        &__midl_frag7,
+        &__midl_frag6,
         { 
         /* boolean */
             0,
@@ -567,15 +546,24 @@ static const __midl_frag6_t __midl_frag6 =
     }
 };
 
-static const __midl_frag4_t __midl_frag4 =
+static const __midl_frag3_t __midl_frag3 =
+{ 
+/* *boolean */
+    0x20,    /* FC64_RP */
+    (NDR64_UINT8) 12 /* 0xc */,
+    (NDR64_UINT16) 0 /* 0x0 */,
+    &__midl_frag6
+};
+
+static const __midl_frag2_t __midl_frag2 =
 { 
 /* RpcShutdown */
     { 
     /* RpcShutdown */      /* procedure RpcShutdown */
-        (NDR64_UINT32) 17301568 /* 0x1080040 */,    /* explicit handle */ /* IsIntrepreted, HasReturn, HasExtensions */
+        (NDR64_UINT32) 16777280 /* 0x1000040 */,    /* explicit handle */ /* IsIntrepreted, HasExtensions */
         (NDR64_UINT32) 16 /* 0x10 */ ,  /* Stack size */
         (NDR64_UINT32) 0 /* 0x0 */,
-        (NDR64_UINT32) 8 /* 0x8 */,
+        (NDR64_UINT32) 29 /* 0x1d */,
         (NDR64_UINT16) 0 /* 0x0 */,
         (NDR64_UINT16) 0 /* 0x0 */,
         (NDR64_UINT16) 1 /* 0x1 */,
@@ -594,26 +582,26 @@ static const __midl_frag4_t __midl_frag4 =
         (NDR64_UINT16) 0 /* 0x0 */      /* Notify index */
     },
     { 
-    /* int */      /* parameter int */
-        &__midl_frag9,
+    /* state */      /* parameter state */
+        &__midl_frag6,
         { 
-        /* int */
+        /* state */
             0,
             0,
             0,
             0,
             1,
-            1,
-            1,
+            0,
             1,
             0,
+            1,
             0,
             0,
             0,
             0,
             (NDR64_UINT16) 0 /* 0x0 */,
-            0
-        },    /* [out], IsReturn, Basetype, ByValue */
+            1
+        },    /* [out], Basetype, SimpleRef, UseCache */
         (NDR64_UINT16) 0 /* 0x0 */,
         8 /* 0x8 */,   /* Stack offset */
     }
@@ -628,10 +616,9 @@ static const __midl_frag1_t __midl_frag1 =
 
 static const FormatInfoRef Plugin_Ndr64ProcTable[] =
     {
-    &__midl_frag4,
-    &__midl_frag4,
-    &__midl_frag6,
-    &__midl_frag8
+    &__midl_frag2,
+    &__midl_frag5,
+    &__midl_frag7
     };
 
 
@@ -664,12 +651,11 @@ static const RPC_DISPATCH_FUNCTION Plugin_NDR64__table[] =
     NdrServerCallAll,
     NdrServerCallAll,
     NdrServerCallAll,
-    NdrServerCallAll,
     0
     };
 static const RPC_DISPATCH_TABLE Plugin_NDR64__v1_0_DispatchTable = 
     {
-    4,
+    3,
     (RPC_DISPATCH_FUNCTION*)Plugin_NDR64__table
     };
 
@@ -700,7 +686,6 @@ static const MIDL_SYNTAX_INFO Plugin_SyntaxInfo [  2 ] =
 
 static const SERVER_ROUTINE Plugin_ServerRoutineTable[] = 
     {
-    (SERVER_ROUTINE)RpcStart,
     (SERVER_ROUTINE)RpcShutdown,
     (SERVER_ROUTINE)RpcPluginHealthCheck,
     (SERVER_ROUTINE)RpcCommandPlugin

@@ -31,8 +31,8 @@
 
 #include "rpc_controller_h.h"
 
-#define TYPE_FORMAT_STRING_SIZE   7                                 
-#define PROC_FORMAT_STRING_SIZE   71                                
+#define TYPE_FORMAT_STRING_SIZE   17                                
+#define PROC_FORMAT_STRING_SIZE   49                                
 #define EXPR_FORMAT_STRING_SIZE   1                                 
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   0            
@@ -149,7 +149,10 @@ extern const MIDL_STUB_DESC Controller_StubDesc;
 static RPC_BINDING_HANDLE Controller__MIDL_AutoBindHandle;
 
 
-boolean RpcControllerHealthCheck( void)
+boolean RpcControllerHealthCheck( 
+    /* [in] */ handle_t pluginHandle,
+    /* [in] */ int pluginID,
+    /* [range][in] */ unsigned char *port)
 {
 
     CLIENT_CALL_RETURN _RetVal;
@@ -158,23 +161,10 @@ boolean RpcControllerHealthCheck( void)
                   ( PMIDL_STUBLESS_PROXY_INFO  )&Controller_ProxyInfo,
                   0,
                   0,
-                  0);
+                  pluginHandle,
+                  pluginID,
+                  port);
     return ( boolean  )_RetVal.Simple;
-    
-}
-
-
-void RpcRequestController( 
-    /* [in] */ int request,
-    /* [string][out][in] */ unsigned char *result)
-{
-
-    NdrClientCall3(
-                  ( PMIDL_STUBLESS_PROXY_INFO  )&Controller_ProxyInfo,
-                  1,
-                  0,
-                  request,
-                  result);
     
 }
 
@@ -190,59 +180,44 @@ static const controller_MIDL_PROC_FORMAT_STRING controller__MIDL_ProcFormatStrin
 
 	/* Procedure RpcControllerHealthCheck */
 
-			0x32,		/* FC_BIND_PRIMITIVE */
+			0x0,		/* 0 */
 			0x48,		/* Old Flags:  */
 /*  2 */	NdrFcLong( 0x0 ),	/* 0 */
 /*  6 */	NdrFcShort( 0x0 ),	/* 0 */
-/*  8 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
-/* 10 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 12 */	NdrFcShort( 0x5 ),	/* 5 */
-/* 14 */	0x44,		/* Oi2 Flags:  has return, has ext, */
-			0x1,		/* 1 */
-/* 16 */	0xa,		/* 10 */
+/*  8 */	NdrFcShort( 0x20 ),	/* X64 Stack size/offset = 32 */
+/* 10 */	0x32,		/* FC_BIND_PRIMITIVE */
+			0x0,		/* 0 */
+/* 12 */	NdrFcShort( 0x0 ),	/* X64 Stack size/offset = 0 */
+/* 14 */	NdrFcShort( 0x21 ),	/* 33 */
+/* 16 */	NdrFcShort( 0x5 ),	/* 5 */
+/* 18 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x3,		/* 3 */
+/* 20 */	0xa,		/* 10 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 18 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 20 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 22 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 24 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 26 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 28 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter pluginID */
+
+/* 30 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 32 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
+/* 34 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Parameter port */
+
+/* 36 */	NdrFcShort( 0x10a ),	/* Flags:  must free, in, simple ref, */
+/* 38 */	NdrFcShort( 0x10 ),	/* X64 Stack size/offset = 16 */
+/* 40 */	NdrFcShort( 0x6 ),	/* Type Offset=6 */
 
 	/* Return value */
 
-/* 26 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 28 */	NdrFcShort( 0x0 ),	/* X64 Stack size/offset = 0 */
-/* 30 */	0x3,		/* FC_SMALL */
+/* 42 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 44 */	NdrFcShort( 0x18 ),	/* X64 Stack size/offset = 24 */
+/* 46 */	0x3,		/* FC_SMALL */
 			0x0,		/* 0 */
-
-	/* Procedure RpcRequestController */
-
-/* 32 */	0x32,		/* FC_BIND_PRIMITIVE */
-			0x48,		/* Old Flags:  */
-/* 34 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 38 */	NdrFcShort( 0x1 ),	/* 1 */
-/* 40 */	NdrFcShort( 0x10 ),	/* X64 Stack size/offset = 16 */
-/* 42 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 44 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 46 */	0x43,		/* Oi2 Flags:  srv must size, clt must size, has ext, */
-			0x2,		/* 2 */
-/* 48 */	0xa,		/* 10 */
-			0x1,		/* Ext Flags:  new corr desc, */
-/* 50 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 52 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 54 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 56 */	NdrFcShort( 0x0 ),	/* 0 */
-
-	/* Parameter request */
-
-/* 58 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
-/* 60 */	NdrFcShort( 0x0 ),	/* X64 Stack size/offset = 0 */
-/* 62 */	0x8,		/* FC_LONG */
-			0x0,		/* 0 */
-
-	/* Parameter result */
-
-/* 64 */	NdrFcShort( 0x11b ),	/* Flags:  must size, must free, in, out, simple ref, */
-/* 66 */	NdrFcShort( 0x8 ),	/* X64 Stack size/offset = 8 */
-/* 68 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
 
 			0x0
         }
@@ -254,10 +229,12 @@ static const controller_MIDL_TYPE_FORMAT_STRING controller__MIDL_TypeFormatStrin
         {
 			NdrFcShort( 0x0 ),	/* 0 */
 /*  2 */	
-			0x11, 0x8,	/* FC_RP [simple_pointer] */
-/*  4 */	
-			0x22,		/* FC_C_CSTRING */
-			0x5c,		/* FC_PAD */
+			0x11, 0x0,	/* FC_RP */
+/*  4 */	NdrFcShort( 0x2 ),	/* Offset= 2 (6) */
+/*  6 */	0xb7,		/* FC_RANGE */
+			0x2,		/* 2 */
+/*  8 */	NdrFcLong( 0x3 ),	/* 3 */
+/* 12 */	NdrFcLong( 0x6 ),	/* 6 */
 
 			0x0
         }
@@ -265,8 +242,7 @@ static const controller_MIDL_TYPE_FORMAT_STRING controller__MIDL_TypeFormatStrin
 
 static const unsigned short Controller_FormatStringOffsetTable[] =
     {
-    0,
-    32
+    0
     };
 
 
@@ -306,27 +282,17 @@ static const unsigned short Controller_FormatStringOffsetTable[] =
 
 
 typedef 
-struct _NDR64_CONFORMANT_STRING_FORMAT
-__midl_frag7_t;
-extern const __midl_frag7_t __midl_frag7;
-
-typedef 
-struct _NDR64_POINTER_FORMAT
+NDR64_FORMAT_CHAR
 __midl_frag6_t;
 extern const __midl_frag6_t __midl_frag6;
 
 typedef 
-NDR64_FORMAT_CHAR
+struct _NDR64_RANGE_FORMAT
 __midl_frag5_t;
 extern const __midl_frag5_t __midl_frag5;
 
 typedef 
-struct 
-{
-    struct _NDR64_PROC_FORMAT frag1;
-    struct _NDR64_PARAM_FORMAT frag2;
-    struct _NDR64_PARAM_FORMAT frag3;
-}
+struct _NDR64_POINTER_FORMAT
 __midl_frag4_t;
 extern const __midl_frag4_t __midl_frag4;
 
@@ -339,7 +305,10 @@ typedef
 struct 
 {
     struct _NDR64_PROC_FORMAT frag1;
-    struct _NDR64_PARAM_FORMAT frag2;
+    struct _NDR64_BIND_AND_NOTIFY_EXTENSION frag2;
+    struct _NDR64_PARAM_FORMAT frag3;
+    struct _NDR64_PARAM_FORMAT frag4;
+    struct _NDR64_PARAM_FORMAT frag5;
 }
 __midl_frag2_t;
 extern const __midl_frag2_t __midl_frag2;
@@ -349,58 +318,62 @@ NDR64_FORMAT_UINT32
 __midl_frag1_t;
 extern const __midl_frag1_t __midl_frag1;
 
-static const __midl_frag7_t __midl_frag7 =
+static const __midl_frag6_t __midl_frag6 =
+0x2    /* FC64_INT8 */;
+
+static const __midl_frag5_t __midl_frag5 =
 { 
-/* *char */
-    { 
-    /* *char */
-        0x63,    /* FC64_CONF_CHAR_STRING */
-        { 
-        /* *char */
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        },
-        (NDR64_UINT16) 1 /* 0x1 */
-    }
+/* char */
+    0xa4,    /* FC64_RANGE */
+    0x10,    /* FC64_CHAR */
+    (NDR64_UINT16) 0 /* 0x0 */,
+    (NDR64_INT64) 3 /* 0x3 */,
+    (NDR64_INT64) 6 /* 0x6 */
 };
 
-static const __midl_frag6_t __midl_frag6 =
+static const __midl_frag4_t __midl_frag4 =
 { 
 /* *char */
     0x20,    /* FC64_RP */
     (NDR64_UINT8) 0 /* 0x0 */,
     (NDR64_UINT16) 0 /* 0x0 */,
-    &__midl_frag7
+    &__midl_frag5
 };
 
-static const __midl_frag5_t __midl_frag5 =
+static const __midl_frag3_t __midl_frag3 =
 0x5    /* FC64_INT32 */;
 
-static const __midl_frag4_t __midl_frag4 =
+static const __midl_frag2_t __midl_frag2 =
 { 
-/* RpcRequestController */
+/* RpcControllerHealthCheck */
     { 
-    /* RpcRequestController */      /* procedure RpcRequestController */
-        (NDR64_UINT32) 393282 /* 0x60042 */,    /* primitive handle */ /* IsIntrepreted, ServerMustSize, ClientMustSize */
-        (NDR64_UINT32) 16 /* 0x10 */ ,  /* Stack size */
-        (NDR64_UINT32) 8 /* 0x8 */,
-        (NDR64_UINT32) 0 /* 0x0 */,
+    /* RpcControllerHealthCheck */      /* procedure RpcControllerHealthCheck */
+        (NDR64_UINT32) 17301568 /* 0x1080040 */,    /* explicit handle */ /* IsIntrepreted, HasReturn, HasExtensions */
+        (NDR64_UINT32) 32 /* 0x20 */ ,  /* Stack size */
+        (NDR64_UINT32) 37 /* 0x25 */,
+        (NDR64_UINT32) 5 /* 0x5 */,
         (NDR64_UINT16) 0 /* 0x0 */,
         (NDR64_UINT16) 0 /* 0x0 */,
-        (NDR64_UINT16) 2 /* 0x2 */,
-        (NDR64_UINT16) 0 /* 0x0 */
+        (NDR64_UINT16) 3 /* 0x3 */,
+        (NDR64_UINT16) 8 /* 0x8 */
     },
     { 
-    /* request */      /* parameter request */
-        &__midl_frag5,
+    /* struct _NDR64_BIND_AND_NOTIFY_EXTENSION */
         { 
-        /* request */
+        /* struct _NDR64_BIND_AND_NOTIFY_EXTENSION */
+            0x72,    /* FC64_BIND_PRIMITIVE */
+            (NDR64_UINT8) 0 /* 0x0 */,
+            0 /* 0x0 */,   /* Stack offset */
+            (NDR64_UINT8) 0 /* 0x0 */,
+            (NDR64_UINT8) 0 /* 0x0 */
+        },
+        (NDR64_UINT16) 0 /* 0x0 */      /* Notify index */
+    },
+    { 
+    /* pluginID */      /* parameter pluginID */
+        &__midl_frag3,
+        { 
+        /* pluginID */
             0,
             0,
             0,
@@ -418,18 +391,18 @@ static const __midl_frag4_t __midl_frag4 =
             0
         },    /* [in], Basetype, ByValue */
         (NDR64_UINT16) 0 /* 0x0 */,
-        0 /* 0x0 */,   /* Stack offset */
+        8 /* 0x8 */,   /* Stack offset */
     },
     { 
-    /* result */      /* parameter result */
-        &__midl_frag7,
+    /* port */      /* parameter port */
+        &__midl_frag5,
         { 
-        /* result */
-            1,
+        /* port */
+            0,
             1,
             0,
             1,
-            1,
+            0,
             0,
             0,
             0,
@@ -440,32 +413,13 @@ static const __midl_frag4_t __midl_frag4 =
             0,
             (NDR64_UINT16) 0 /* 0x0 */,
             0
-        },    /* MustSize, MustFree, [in], [out], SimpleRef */
+        },    /* MustFree, [in], SimpleRef */
         (NDR64_UINT16) 0 /* 0x0 */,
-        8 /* 0x8 */,   /* Stack offset */
-    }
-};
-
-static const __midl_frag3_t __midl_frag3 =
-0x2    /* FC64_INT8 */;
-
-static const __midl_frag2_t __midl_frag2 =
-{ 
-/* RpcControllerHealthCheck */
-    { 
-    /* RpcControllerHealthCheck */      /* procedure RpcControllerHealthCheck */
-        (NDR64_UINT32) 524354 /* 0x80042 */,    /* primitive handle */ /* IsIntrepreted, HasReturn */
-        (NDR64_UINT32) 8 /* 0x8 */ ,  /* Stack size */
-        (NDR64_UINT32) 0 /* 0x0 */,
-        (NDR64_UINT32) 5 /* 0x5 */,
-        (NDR64_UINT16) 0 /* 0x0 */,
-        (NDR64_UINT16) 0 /* 0x0 */,
-        (NDR64_UINT16) 1 /* 0x1 */,
-        (NDR64_UINT16) 0 /* 0x0 */
+        16 /* 0x10 */,   /* Stack offset */
     },
     { 
     /* boolean */      /* parameter boolean */
-        &__midl_frag3,
+        &__midl_frag6,
         { 
         /* boolean */
             0,
@@ -485,7 +439,7 @@ static const __midl_frag2_t __midl_frag2 =
             0
         },    /* [out], IsReturn, Basetype, ByValue */
         (NDR64_UINT16) 0 /* 0x0 */,
-        0 /* 0x0 */,   /* Stack offset */
+        24 /* 0x18 */,   /* Stack offset */
     }
 };
 
@@ -498,8 +452,7 @@ static const __midl_frag1_t __midl_frag1 =
 
 static const FormatInfoRef Controller_Ndr64ProcTable[] =
     {
-    &__midl_frag2,
-    &__midl_frag4
+    &__midl_frag2
     };
 
 
