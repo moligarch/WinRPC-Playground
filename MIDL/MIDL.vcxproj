@@ -22,6 +22,10 @@
     <Midl Include="controller.idl" />
     <Midl Include="plugin.idl" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="controller.acf" />
+    <None Include="plugin.acf" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -74,6 +78,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <MultiProcMIDL>true</MultiProcMIDL>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <MultiProcMIDL>true</MultiProcMIDL>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <MultiProcMIDL>true</MultiProcMIDL>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <MultiProcMIDL>true</MultiProcMIDL>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -95,6 +111,7 @@
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
       <WarningLevel>3</WarningLevel>
       <GenerateServerFiles>Stub</GenerateServerFiles>
+      <ApplicationConfigurationMode>true</ApplicationConfigurationMode>
     </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -122,6 +139,7 @@
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
       <WarningLevel>3</WarningLevel>
       <GenerateServerFiles>Stub</GenerateServerFiles>
+      <ApplicationConfigurationMode>true</ApplicationConfigurationMode>
     </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -145,6 +163,7 @@
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
       <WarningLevel>3</WarningLevel>
       <GenerateServerFiles>Stub</GenerateServerFiles>
+      <ApplicationConfigurationMode>true</ApplicationConfigurationMode>
     </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -172,6 +191,7 @@
       <HeaderFileName>rpc_%(Filename)_h.h</HeaderFileName>
       <WarningLevel>3</WarningLevel>
       <GenerateServerFiles>Stub</GenerateServerFiles>
+      <ApplicationConfigurationMode>true</ApplicationConfigurationMode>
     </Midl>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

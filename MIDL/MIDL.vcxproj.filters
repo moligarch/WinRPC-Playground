@@ -22,4 +22,8 @@
       <Filter>Source Files</Filter>
     </Midl>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="controller.acf" />
+    <None Include="plugin.acf" />
+  </ItemGroup>
 </Project>
