@@ -18,22 +18,34 @@
     <ClCompile Include="main_controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RpcClient.cpp">
+    <ClCompile Include="src\controller\controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InterfaceImpl.cpp">
+    <ClCompile Include="src\InterfaceImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\MIDL\midl\plugin_c.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\MIDL\midl\controller_s.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plugin\plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RpcClient.h">
+    <ClInclude Include="include\controller\controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\MIDL\midl\rpc_plugin_h.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\MIDL\midl\rpc_controller_h.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\plugin\plugin.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

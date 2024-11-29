@@ -6,7 +6,7 @@
     </PropertyGroup>
 
 	<PropertyGroup>
-		<OutDir>$(SolutionDir)Build\bin\$(PlatformShortName)\$(Configuration)\</OutDir>
+		<OutDir>$(SolutionDir)Build\bin\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</OutDir>
 		<IntDir>$(SolutionDir)Build\obj\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</IntDir>
 	</PropertyGroup>
 

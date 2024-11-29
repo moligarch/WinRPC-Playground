@@ -2,30 +2,20 @@
 //
 
 #include <iostream>
-#include "RpcClient.h"
+#include <string>
+
+#include "controller/controller.h"
 
 int main()
 {
-    char temp;
-    auto plugin{ RpcClient() };
-    std::cout << "Kill Plugin?(y or n)\n";
-    std::cin >> temp;
+    auto controller = Controller::Get();
+    
+    while (controller->GetPluginList().size() == 0) {
+        std::cout << "Wait for Plugin ..." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+   }
 
-    if (temp == 'y' || temp == 'Y') {
-        auto state = plugin.Terminate();
-        if (state == 1) {
-            std::cout << "Plugin Successfully Terminated." << std::endl;
-            exit(0);
-        }
-    }
 
-    do {
-        std::cout << "Initiating command to server. enter command number (write -1 o exit): ";
-        std::cin >> temp;
-        std::string res;
-        auto state = plugin.SendPluginCommand(temp - '0', res);
-        
-    } while (temp != -1);
     std::cout << "Exiting Controller ..." << std::endl;
     return 0;
 }

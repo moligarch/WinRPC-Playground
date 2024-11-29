@@ -138,18 +138,6 @@
       <AdditionalDependencies>Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\MIDL\midl\controller_c.c" />
-    <ClCompile Include="..\MIDL\midl\plugin_s.c" />
-    <ClCompile Include="PluginMain.cpp" />
-    <ClCompile Include="InterfaceImpl.cpp" />
-    <ClCompile Include="Executer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\MIDL\midl\rpc_controller_h.h" />
-    <ClInclude Include="..\MIDL\midl\rpc_plugin_h.h" />
-    <ClInclude Include="Executer.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

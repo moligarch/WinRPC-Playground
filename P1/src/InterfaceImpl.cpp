@@ -7,14 +7,9 @@
 
 #include "Plugin1.h"
 
-int RpcStart(
-    /* [in] */ handle_t IDL_handl)
-{
-    return 0;
-}
-
-int RpcShutdown(
-    /* [in] */ handle_t IDL_handle)
+void RpcShutdown(
+    /* [in] */ handle_t IDL_handle,
+    /* [out] */ boolean* state)
 {
     auto server = Plugin1::Get();
     std::cout << "RpcController wants to terminate you. Is it OK?\n1.Yes\n2.No\n";
@@ -27,10 +22,10 @@ int RpcShutdown(
             std::this_thread::sleep_for(std::chrono::seconds(5));
             server->Stop();
             });
-        return 1;
+        *state = true;
     }
     
-    return 0;
+    *state = false;
 }
 
 boolean RpcPluginHealthCheck(

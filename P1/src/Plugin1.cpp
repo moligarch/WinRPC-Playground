@@ -1,7 +1,10 @@
 #include "Plugin1.h"
 
-#include <midl/rpc_plugin_h.h>
 #include <iostream>
+
+#include <midl/rpc_controller_h.h>
+#include <midl/rpc_plugin_h.h>
+#include <string>
 
 // Naive security callback.
 RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE /*hInterface*/, void* /*pBindingHandle*/)
@@ -10,28 +13,83 @@ RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE /*hInterface*/, void* /*pBind
 }
 
 
-Plugin1::Plugin1()
+Plugin1::Plugin1() : 
+	plugin_handle_(NULL),
+	id_(29),
+	endpoint_((unsigned char*)"12345")
 {
 	SetListenState(false);
+
+	RPC_STATUS status;
+
+	status = RpcStringBindingComposeA(
+		NULL,                            
+		(unsigned char*)("ncacn_ip_tcp"),
+		(unsigned char*)("localhost"),   
+		(unsigned char*)("54321"),       
+		NULL,                            
+		&str_bind_);                     
+
+	if (status)
+		exit(status);
+
+	status = RpcBindingFromStringBindingA(str_bind_, &hController);
+
+	if (status)
+		exit(status);
+
+}
+
+void Plugin1::Register()
+{
+	while (true) {
+		RpcTryExcept
+		{
+			auto state = ::RpcControllerHealthCheck(plugin_handle_, id_, endpoint_);
+			if (state) {
+				break;
+			}
+		}
+			RpcExcept(1)
+		{
+			std::cerr << "Failed to communicate with Controller: " << RpcExceptionCode()	<< std::endl;
+			std::cout << "Trying to register on controller ..." << std::endl;
+			std::this_thread::sleep_for(std::chrono::seconds(5));
+		}
+		RpcEndExcept
+	}
+	std::cout << "Successfully registered." << std::endl;
 }
 
 void Plugin1::StartListen()
 {
-	auto status = RpcServerListen(
-		1,						// Recommended minimum number of threads.
-		RPC_C_LISTEN_MAX_CALLS_DEFAULT,	// Recommended maximum number of threads.
-		FALSE);							// Start listening now.
+	std::lock_guard<std::mutex> lk(mtx_);
+	auto status = RpcMgmtWaitServerListen();
+	SetListenState(false); // Finishing RpcMgmtWaitServerListen means listening stopped.
 
 	if (status) {
-		SetListenState(false);
+		// to do
 	}
-
 }
 
 Plugin1::~Plugin1()
 {
 	if (GetListenState())
 		Stop();
+
+	// Free the memory allocated by a string.
+	auto status = RpcStringFreeA(
+		&str_bind_); // String to be freed.
+
+	if (status)
+		exit(status);
+
+	// Releases binding handle resources and disconnects from the server.
+	status = RpcBindingFree(
+		&hController); // Frees the implicit binding handle defined in the IDL file.
+
+	if (status)
+		exit(status);
 }
 
 Plugin1* Plugin1::Get()
@@ -51,7 +109,6 @@ void Plugin1::Start()
 	RPC_STATUS status;
 
 	unsigned char* protocol_seq{ (unsigned char*)"ncacn_ip_tcp" };
-	unsigned char* endpoint{ (unsigned char*)"12345" };
 	unsigned char* security{ nullptr };
 
 	// Uses the protocol combined with the endpoint for receiving
@@ -59,7 +116,7 @@ void Plugin1::Start()
 	status = RpcServerUseProtseqEpA(
 		protocol_seq,					// Use TCP/IP protocol.
 		RPC_C_PROTSEQ_MAX_REQS_DEFAULT,	// Backlog queue length for TCP/IP.
-		endpoint,						// TCP/IP port to use.
+		endpoint_,						// TCP/IP port to use.
 		NULL);							// No security.
 
 
@@ -80,7 +137,19 @@ void Plugin1::Start()
 	if (status) {
 		exit(status);
 	}
+
+	status = RpcServerListen(
+		1,						// Recommended minimum number of threads.
+		RPC_C_LISTEN_MAX_CALLS_DEFAULT,	// Recommended maximum number of threads.
+		TRUE);							// Do Not start listening now.
+
+	if (status) {
+		exit(status);
+	}
+
 	listener_ = std::thread(&Plugin1::StartListen, this);
+
+	Register();
 }
 
 void Plugin1::Stop()
@@ -92,19 +161,22 @@ void Plugin1::Stop()
 	if (status)
 		exit(status);
 
+	if (listener_.joinable()) {
+		listener_.join();
+	}
+	
 	status = RpcServerUnregisterIf(NULL, NULL, FALSE);
 
 	if (status)
 		exit(status);
 
-	status = RpcBindingFree(&Plugin_v1_0_s_ifspec);
+	if (plugin_handle_) {
+		status = RpcBindingFree(&plugin_handle_);
 
-	if (status)
-		exit(status);
-
-	if (listener_.joinable()) {
-		listener_.join();
+		if (status)
+			exit(status);
 	}
+
 	SetListenState(false);
 }
 
