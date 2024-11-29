@@ -1,14 +1,14 @@
 #include "RpcClient.h"
 
-#include "rpc_plugin_h.h"
+#include "midl/rpc_plugin_h.h"
 #include <iostream>
 
 RpcClient::RpcClient()
 {
     unsigned char* uuid{ nullptr };
-    unsigned char* protocol_seq{ (unsigned char*)"ncacn_np" };
-    unsigned char* network_address{ nullptr };
-    unsigned char* endpoint{ (unsigned char*)"\\pipe\\plugin" };
+    unsigned char* protocol_seq{ (unsigned char*)"ncacn_ip_tcp" };
+    unsigned char* network_address{ (unsigned char*)"localhost" };
+    unsigned char* endpoint{ (unsigned char*)"12345" };
     unsigned char* option{ nullptr };
 
     status_ = RpcStringBindingComposeA(uuid, protocol_seq, network_address, endpoint, option, &str_bind_);
@@ -16,7 +16,7 @@ RpcClient::RpcClient()
     if (status_)
         exit(status_);
 
-    status_ = RpcBindingFromStringBindingA(str_bind_, &PServer_v1_0_c_ifspec);
+    status_ = RpcBindingFromStringBindingA(str_bind_, &Plugin_v1_0_c_ifspec);
 
     if (status_)
         exit(status_);
@@ -35,7 +35,7 @@ RpcClient::~RpcClient()
     }
 
     // Releases binding handle resources and disconnects from the server.
-    status_ = RpcBindingFree(&PServer_v1_0_c_ifspec);
+    status_ = RpcBindingFree(&Plugin_v1_0_c_ifspec);
 
     if (status_) {
         exit(status_);
@@ -50,7 +50,7 @@ int RpcClient::Terminate()
         // Calls the RPC function. The hExample1Binding binding handle
         // is used implicitly.
         // Connection is done here.
-        return RpcTerminate(PServer_v1_0_c_ifspec);
+        return RpcShutdown(Plugin_v1_0_c_ifspec);
     }
         RpcExcept(1)
     {
@@ -58,6 +58,21 @@ int RpcClient::Terminate()
         return 0;
     }
     RpcEndExcept
+}
+
+int RpcClient::SendPluginCommand(int command, std::string& result)
+{
+    RpcTryExcept
+    {
+        RpcCommandPlugin(Plugin_v1_0_c_ifspec, command, reinterpret_cast<unsigned char*>(const_cast<char*>(result.c_str())));
+    }
+        RpcExcept(1)
+    {
+        std::cout << "Runtime reported exception " << RpcExceptionCode() << std::endl;
+        return 0;
+    }
+    RpcEndExcept
+        return 1;
 }
 
 
