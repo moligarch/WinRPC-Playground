@@ -160,7 +160,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\MIDL\midl\plugin_c.c" />
-    <ClCompile Include="InterfaceImpl.cpp" />
     <ClCompile Include="RpcClient.cpp" />
     <ClCompile Include="main_controller.cpp" />
   </ItemGroup>

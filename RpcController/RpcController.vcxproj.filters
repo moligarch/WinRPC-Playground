@@ -21,9 +21,6 @@
     <ClCompile Include="RpcClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InterfaceImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\MIDL\midl\plugin_c.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
